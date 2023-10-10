@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<title>scelta regione</title>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-4">
+            <h2 class="mb-4 mt-4 text-primary">Dati ISTAT - popolazione italiana</h2>
+            <h3>Seleziona la regione</h3>
+        </header>
+
+        <main>
+            <form id="formRegione" method="post" th:action="@{/provincia}">
+                <select name="regione" id="regione" class="form-select form-select-sm mb-4 w-25" aria-label=".form-select-sm example">
+                    <option value="-1" selected>Regioni</option>
+                </select>
+            
+                <button type="submit" id="btnRegione" class="btn btn-outline-primary">Cerca</button>
+            </form>
+        </main>
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <script>
+        const URL_REGIONI = "http://localhost:9009/api/regioni"
+
+        const TENDINA_REGIONI = document.querySelector('#regione');
+
+        function selectRegione(){
+
+    
+            fetch(URL_REGIONI)
+                .then(res=>res.json())
+                .then(res=>{
+                    res.forEach(regione => {
+                        // ciclo un array di oggetti PopolazioneRegione
+                        // per ogni oggetto creo una <option> con il nome della regione
+                             
+                        const option = document.createElement('option')
+                        option.value = regione.id
+                        option.textContent = regione.regione
+                        TENDINA_REGIONI.append(option)
+                    });
+                })
+        }
+
+        document.addEventListener("DOMContentLoaded", selectRegione)
+
+        let formRegione = document.querySelector("#formRegione");
+
+        TENDINA_REGIONI.addEventListener("change", function(e){
+            console.log(this.value);
+
+            let idRegione = this.value;
+
+            console.log("Hai selezionato la regione con id = " + idRegione);
+
+            formRegione.addEventListener("submit", function(event){
+                
+                if (idRegione == -1) {
+                    // previene l'invio del form se non è stata selezionata la regione
+                    event.preventDefault();
+                }
+            });
+        });
+        
+        
+
+
+
+	</script>
+</body>
+</html>

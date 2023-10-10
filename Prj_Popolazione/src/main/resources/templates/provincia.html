@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<title>scelta provincia</title>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-4">
+            <h2 class="mb-4 mt-4 text-primary">Dati ISTAT - popolazione italiana</h2>
+            <h4 class="mb-3 text-dark" th:text="${regionSelected}">Regione selezionata</h4>
+        </header>
+
+        <main>
+            <div>
+                <label class="form-label" for="provincia"><strong>Seleziona provincia</strong></label>
+            </div>
+            <form id="formProvincia" method="post">
+                <select name="provincia" id="provincia" class="form-select form-select-sm mb-4 w-25" aria-label=".form-select-sm example">
+                    <option value="-1" selected>Province</option>
+                </select>
+            
+                <button type="submit" id="btnProvincia" class="btn btn-primary">Cerca</button>
+                <button type="button" id="btnBack" class="btn btn-danger">Indietro</button>
+            </form>
+        </main>
+    </div>
+
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <script>
+        const TENDINA_PROVINCE = document.querySelector('#provincia');
+
+    </script>
+</body>
+</html>

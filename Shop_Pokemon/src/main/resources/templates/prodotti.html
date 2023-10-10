@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Pokemon Shop</h1>
+
+        <table id="tableP">
+                <tr>
+                <th>Id</th>
+                    <th>Titolo</th>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+                </tr>
+            </table>
+    </div>
+
+    <script>
+
+        const TABELLA = document.getElementById('tableP');
+
+        function refresh() {
+            fetch("http://localhost:9003/api/prodotti")
+                .then(response => response.json())
+                .then(data => {
+    
+                    for (const prodotto of data) {
+                        
+                        const TR = document.createElement('tr')
+                        const TD1 = document.createElement('td')
+                        TD1.textContent = prodotto.id
+                        const TD2 = document.createElement('td')
+                        TD2.textContent = prodotto.titolo
+                        const TD3 = document.createElement('td')
+                        TD3.textContent = prodotto.descrizione
+                        const TD4 = document.createElement('td')
+                        TD4.textContent = prodotto.prezzo
+    
+                        TR.append(TD1, TD2, TD3, TD4)
+    
+                        TABELLA.append(TR)
+                    }
+                })
+        }
+
+        document.addEventListener("DOMContentLoaded", refresh);
+            
+
+
+    </script>
+</body>
+</html>
